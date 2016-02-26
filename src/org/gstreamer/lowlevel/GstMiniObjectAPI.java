@@ -20,13 +20,12 @@
 
 package org.gstreamer.lowlevel;
 
+import com.sun.jna.NativeLong;
+import com.sun.jna.Pointer;
 import org.gstreamer.MiniObject;
-import org.gstreamer.lowlevel.GObjectAPI.GTypeInstance;
 import org.gstreamer.lowlevel.annotations.CallerOwnsReturn;
 import org.gstreamer.lowlevel.annotations.Invalidate;
 
-import com.sun.jna.NativeLong;
-import com.sun.jna.Pointer;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,8 +35,8 @@ import java.util.List;
 public interface GstMiniObjectAPI extends com.sun.jna.Library {
     GstMiniObjectAPI GSTMINIOBJECT_API = GstNative.load(GstMiniObjectAPI.class);
 
-    void gst_mini_object_ref(MiniObject ptr);
-    void gst_mini_object_unref(MiniObject ptr);
+    void gst_mini_object_ref(RefCountedObject ptr);
+    void gst_mini_object_unref(RefCountedObject ptr);
     void gst_mini_object_unref(Pointer ptr);
     @CallerOwnsReturn Pointer ptr_gst_mini_object_copy(MiniObject mini_object);
     @CallerOwnsReturn MiniObject gst_mini_object_copy(MiniObject mini_object);

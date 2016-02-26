@@ -45,9 +45,6 @@ public interface GstCapsAPI extends com.sun.jna.Library {
     @CallerOwnsReturn Caps gst_caps_new_simple(String media_type, String fieldName, Object... args);
     @CallerOwnsReturn Caps gst_caps_new_full(Structure... data);
     
-    Pointer gst_caps_ref(Caps caps);
-    void gst_caps_unref(Caps caps);
-    void gst_caps_unref(Pointer caps);
     @CallerOwnsReturn Pointer ptr_gst_caps_copy(Caps caps);
     @CallerOwnsReturn Pointer ptr_gst_caps_from_string(String string);
     @CallerOwnsReturn Caps gst_caps_copy(Caps caps);

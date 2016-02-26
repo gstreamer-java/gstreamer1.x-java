@@ -21,6 +21,7 @@
 package org.gstreamer;
 
 import org.gstreamer.lowlevel.GstCapsAPI;
+import org.gstreamer.lowlevel.GstMiniObjectAPI;
 import org.gstreamer.lowlevel.GstNative;
 import org.gstreamer.lowlevel.RefCountedObject;
 
@@ -60,9 +61,10 @@ import com.sun.jna.Pointer;
  */
 public class Caps extends RefCountedObject {
     public static final String GTYPE_NAME = "GstCaps";
-    
-    private static final GstCapsAPI gst = GstNative.load(GstCapsAPI.class);
-    
+
+    private static interface API extends GstCapsAPI, GstMiniObjectAPI {}
+    private static final API gst = GstNative.load(API.class);
+
     /**
      * Creates a new Caps that is empty.  
      * That is, the returned Caps contains no media formats.
@@ -418,13 +420,13 @@ public class Caps extends RefCountedObject {
         return other == this || isEqual((Caps) other);
     }
     protected void ref() {
-        gst.gst_caps_ref(this);
+        gst.gst_mini_object_ref(this);
     }
     protected void unref() {
-        gst.gst_caps_unref(this);
+        gst.gst_mini_object_unref(this);
     }
     protected void disposeNativeHandle(Pointer ptr) {
-        gst.gst_caps_unref(ptr);
+        gst.gst_mini_object_unref(ptr);
     }
 
     
